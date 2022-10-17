@@ -6,38 +6,35 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/16 18:27:38 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/17 17:45:26 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H 
 
-# include <string.h>
-# include <strings.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <ctype.h>
-# include <limits.h>
-# include <stdarg.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <stddef.h>
+# include "libft/libft_cursus/libft.h"
+# include "libft/get_next_line/get_next_line.h"
+# include "libft/ft_printf/ft_printf.h"
 
-char	*get_next_line(int fd);
-char	*get_work_line(int fd, char *line);
-char	*get_print_line(char *src);
-char	*stock_end_line(char *work_line, char *print_line);
-char	*pull_end_line(char *work_line);
+typedef struct struct_info 
+{
+	int			x;
+	int			y;
+}					s_info;
 
-int		ft_strlen(const char *s);
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_memchr(char *s, int c, size_t n);
+/* map_info.c */
 
-# ifndef BUFFER_SIZE
-# define BUFFER_SIZE		5
-# endif
+s_info get_map_fd_size(char *map_name);
+s_info get_map_tab_size(char **map);
+
+
+/* map_error.c */
+
+int	map_error(char **map);
+
+/* main.c */
+
+char **get_map(char **map, char *map_name, int fd);
 
 #endif 
