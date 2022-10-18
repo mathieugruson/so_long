@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:41:57 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 15:39:43 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:48:34 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ char	*get_work_line(int fd, char *work_line)
 	{
 		return (NULL);
 	}
-	while (!ft_memchr_gnl(work_line, '\n', ft_strlen_gnl(work_line)) && buflen != 0)
+	while (!ft_memchr_gnl(work_line, '\n', ft_strlen_gnl(work_line))
+		&& buflen != 0)
 	{
 		buflen = read(fd, buf, (BUFFER_SIZE));
 		if (buflen == -1)

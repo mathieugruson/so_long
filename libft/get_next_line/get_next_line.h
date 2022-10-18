@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 17:54:55 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/17 13:36:39 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:57:08 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <stddef.h>
 # include "../libft_cursus/libft.h"
 
-
 char	*get_next_line(int fd);
 char	*get_work_line(int fd, char *line);
 char	*get_print_line(char *src);
@@ -39,7 +38,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2);
 int		ft_memchr_gnl(char *s, int c, size_t n);
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE		5
+#  define BUFFER_SIZE		5
 # endif
 
 #endif 

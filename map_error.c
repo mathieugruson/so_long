@@ -6,13 +6,13 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:41:40 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 15:30:06 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 16:11:01 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	map_dimension_error(s_info map_size)
+int	map_dimension_error(t_info map_size)
 {
 	if (map_size.y < 3)
 		return (1);
@@ -23,7 +23,7 @@ int	map_dimension_error(s_info map_size)
 	return (0);
 }
 
-int	map_character_error(char **map, s_info map_size)
+int	map_character_error(char **map, t_info map_size)
 {
 	int	i;
 	int	j;
@@ -52,7 +52,7 @@ int	map_character_error(char **map, s_info map_size)
 	return (0);
 }
 
-int	map_wall_error(char **map, s_info map_size)
+int	map_wall_error(char **map, t_info map_size)
 {
 	int	i;
 	int	j;
@@ -76,9 +76,9 @@ int	map_wall_error(char **map, s_info map_size)
 
 int	map_error(char **map)
 {
-	s_info	map_size;
-	char **map_cpy;
-	
+	t_info	map_size;
+	char	**map_cpy;
+
 	map_size = get_map_tab_size(map);
 	if (map_dimension_error(map_size))
 		return (1);
@@ -86,11 +86,11 @@ int	map_error(char **map)
 		return (1);
 	if (map_character_error(map, map_size))
 		return (1);
-	map_cpy = get_map("map.ber");
+	map_cpy = ft_tabcpy(map);
 	if (!find_path_to('E', map_cpy))
 	{
-		ft_free_tab(map_cpy);	
-		return(1);
+		ft_free_tab(map_cpy);
+		return (1);
 	}
 	ft_free_tab(map_cpy);
 	return (0);

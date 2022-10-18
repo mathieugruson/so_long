@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 21:43:27 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 11:43:47 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:55:16 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_putchar(char c);
 int		ft_putnbr(int nb);
 void	ft_putstr(char *s);
 void	ft_puttab(char **tab);
-void 	ft_free_tab(char **tab);
+void	ft_free_tab(char **tab);
 char	**ft_tabcpy(char **tab);
 int		ft_tablen(char **tab);
 
