@@ -4,6 +4,8 @@ flags = -Wall -Wextra -Werror
 functions_c = *.c 
 headers = *.h
 functions_o = *.o
+libx = -L mlx_linux -lmlx_Linux
+libxflags = -lmlx -lXext -lX11
 
 all : $(NAME) 
 
@@ -12,7 +14,8 @@ $(functions_o) : $(functions_c) $(headers)
 
 $(NAME) : $(functions_o)
 	$(MAKE) --no-print-directory -C libft
-	$(CC) $(flags) $(functions_o) libft/libft.a -o $(NAME) 
+	$(MAKE) --no-print-directory -C mlx_linux
+	$(CC) $(flags) $(functions_o) libft/libft.a $(libx) $(libxflags) -o $(NAME) -g 
 
 clean :
 	$(MAKE) fclean -C libft
