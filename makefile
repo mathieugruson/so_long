@@ -1,6 +1,6 @@
 NAME = so_long
 CC = gcc
-flags = -Wall -Wextra -Werror
+flags = -Wall -Wextra
 functions_c = *.c 
 headers = *.h
 functions_o = *.o
