@@ -115,23 +115,23 @@ char	**ft_split(char const *s, char c)
 	return (s1);
 }
 
-int main()
-{
-	char	**tabstr;
-	int		i;
+// int main()
+// {
+// 	char	**tabstr;
+// 	int		i;
 
-	i = 0;
-	if (!(tabstr = ft_split("lorem ipsnon risus. Suspendisse", ' ')))
-		printf("NULL\n");
-	else
-	{
-		while (tabstr[i])
-		{
-			printf("%s\n", tabstr[i]);
-			free(tabstr[i]);		
-			write(1, "\n", 1);
-			i++;
-		}
-	}
-	free (tabstr);
-}
+// 	i = 0;
+// 	if (!(tabstr = ft_split("lorem ipsnon risus. Suspendisse", ' ')))
+// 		printf("NULL\n");
+// 	else
+// 	{
+// 		while (tabstr[i])
+// 		{
+// 			printf("%s\n", tabstr[i]);
+// 			free(tabstr[i]);		
+// 			write(1, "\n", 1);
+// 			i++;
+// 		}
+// 	}
+// 	free (tabstr);
+// }

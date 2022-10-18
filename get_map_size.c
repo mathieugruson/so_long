@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:42:18 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 11:47:13 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:42:16 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ s_info get_map_fd_size(char *map_name)
 	fd = open(map_name, O_RDONLY);
 	tmp = get_next_line(fd);
 	map.x = ft_strlen(tmp) - 1;
+	free(tmp);
 	i = 0;
 	while (tmp)
 	{
 		tmp = get_next_line(fd);
+		free(tmp);
 		i++;
 	}
+	free(tmp);
 	close(fd);
 	map.y = i;	
 	return (map);	

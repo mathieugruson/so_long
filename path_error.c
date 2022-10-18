@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 18:47:09 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 11:36:07 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:30:19 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,5 @@ int	find_path_to(char c, char **map_cpy)
 		if (map_cpy[y] == NULL)
 			y = 0;
 	}
-	ft_free_tab(map_cpy);
 	return (0);
 }

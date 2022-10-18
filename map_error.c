@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:41:40 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 11:17:08 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:30:06 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ int	map_error(char **map)
 		return (1);
 	map_cpy = get_map("map.ber");
 	if (!find_path_to('E', map_cpy))
+	{
+		ft_free_tab(map_cpy);	
 		return(1);
+	}
+	ft_free_tab(map_cpy);
 	return (0);
 }

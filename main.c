@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:22:38 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 12:08:06 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:37:03 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int	main()
 	char **map;	
 	map = NULL;
 	map = get_map("map.ber");
+	ft_puttab(map);
 	ft_free_tab(map);	
-
+	
 	// if (map_error(map))
 	// {
 	// 	ft_printf("Error\n");

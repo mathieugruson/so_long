@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:41:57 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/17 13:33:38 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:39:43 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,18 +128,14 @@ char	*get_next_line(int fd)
 // 	char	*line;
 
 // 	fd = 0;
-// 	fd = open("get_next_line.c", O_RDONLY);
-// 	line = get_next_line(fd);
-// 	printf(" 1 : %s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf(" 2 : %s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf(" 3 : %s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf(" 3 : %s", line);
+// 	fd = open("map.ber", O_RDONLY);
+// 	line = "start";
+// 	while(line)
+// 	{
+// 		line = get_next_line(fd);
+// 		printf("%s", line);
+// 		free(line);
+// 	}
 // 	free(line);
 // 	close(fd);
 // 	return (0);
