@@ -6,18 +6,21 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:22:38 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/17 17:44:17 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 12:08:06 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char **get_map(char **map, char *map_name, int fd)
+char **get_map(char *map_name)
 {
 	int	i;
 	char *line_map;
 	s_info	map_size;
+	int	fd;
+	char **map;
 	
+	fd = open(map_name, O_RDONLY);
 	map_size = get_map_fd_size(map_name);
 	i = 0;
 	map = malloc(sizeof(char *) * (map_size.y + 1));
@@ -32,26 +35,25 @@ char **get_map(char **map, char *map_name, int fd)
 			return (NULL);
 		map[i][map_size.x + 1] = '\0';
 		ft_strlcpy(map[i], line_map, map_size.x + 2);
+		free(line_map);
 		i++;	
 	}
+	close(fd);
 	return (map);
 }
 
 int	main()
 {
-	int	fd;
-	char **map;
-	
+	char **map;	
 	map = NULL;
-	fd = open("map.ber", O_RDONLY);
-	map = get_map(map, "map.ber", fd);	
-	close(fd);
-	// ft_puttab(map);
-	if (map_error(map))
-	{
-		ft_printf("Error\n");
-		return (0);	
-	}
-	printf("No error\n");
+	map = get_map("map.ber");
+	ft_free_tab(map);	
+
+	// if (map_error(map))
+	// {
+	// 	ft_printf("Error\n");
+	// 	return (0);	
+	// }
+	// printf("No error\n");
 	return (0);
 }

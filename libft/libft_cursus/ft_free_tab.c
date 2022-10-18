@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttab.c                                        :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 15:15:51 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 09:47:16 by mgruson          ###   ########.fr       */
+/*   Created: 2022/10/18 11:18:35 by mgruson           #+#    #+#             */
+/*   Updated: 2022/10/18 12:09:30 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_puttab(char **tab)
+void ft_free_tab(char **tab)
 {
-	int	i;
-
-	i = 0;
-	if(!tab)
-		return ;
-	while(tab[i])
+	int	tablen;
+	int	y;
+	
+	tablen = ft_tablen(tab);
+	y = 0;
+	while (y < tablen)
 	{
-		ft_putstr(tab[i]);
-		i++;
+		free(tab[y]);
+		y++;
 	}	
+	free(tab);
 }

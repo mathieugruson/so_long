@@ -6,76 +6,77 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 18:47:09 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/17 20:21:20 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:36:07 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-s_info	find_character(char **map, s_info map_size, char c)
+void transform_zero(char **map_cpy, int y, int x)
 {
-	s_info	character;
-	int	i;
-	int	j;
+	if (map_cpy[y-1][x] == '0')
+		map_cpy[y-1][x] = 'P';
+	if (map_cpy[y+1][x] == '0')
+		map_cpy[y+1][x] = 'P';
+	if (map_cpy[y][x-1] == '0')
+		map_cpy[y][x-1] = 'P';
+	if (map_cpy[y][x+1] == '0')
+		map_cpy[y][x+1] = 'P';
+}
 
-	i = 0;
-	j = 0;
-	while (map[i])
+int	p_growth(char **map_cpy)
+{
+	int	y;
+	int	x;
+
+	x = 0;
+	y = 0;
+	while(map_cpy[y])
 	{
-		j = 0;
-		while (j <= map_size.x - 1)
-		{	
-			if (map[i][j] == c)
-			{	
-				character.y = i;
-				character.x = j;
+		x = 0;
+		while(map_cpy[y][x])
+		{
+			if (map_cpy[y][x] == 'P')
+			{
+				if (map_cpy[y-1][x] == '0' || map_cpy[y+1][x] == '0'
+					|| map_cpy[y][x-1] == '0' || map_cpy[y][x+1] == '0')
+					return (1);
+				if (map_cpy[y-1][x] == 'E' || map_cpy[y+1][x] == 'E'
+					|| map_cpy[y][x-1] == 'E' || map_cpy[y][x+1] == 'E')
+					return (1);
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
-	return (character);
-}
-
-int	find_path_to(char c, char map, s_info m)
-{
-	int above;
-	int	below;
-	int	left;
-	int	right;
-
-	above = 0;
-	below = 0;
-	right = 0;
-	left = 0;
-	
-	if (map[m.y][m.x] == 'E')
-		return (1);
-	if (map[m.y-1][m.x] == 'E' || map[m.y+1][m.x] == 'E'
-		|| map[m.y][m.x-1] == 'E' || map[m.y][m.x+1] == 'E') 
-		return (1);
-	if (map[m.y-1][m.x] == '0') // au dessus
-		above = find_path_to('E', map[m.y-1][m.x], m);
-	if (map[m.y+1][m.x] == '0') // en dessous
-		below = find_path_to('E', map[m.y+1][m.x], m);
-	if (map[m.y][m.x-1] == '0') // a gauche 
-		left = find_path_to('E', map[m.y-1][m.x], m);
-	if (map[m.y][m.x+1] == '0') // a droite 
-		right = find_path_to('E', map[m.y][m.x+1]);
-	if (above == 1 || below == 1 || right == 1 || left == 1)
-		return (1);
-	return (0)
-}
-
-int	path_error(char **map)
-{
-	s_info	p;
-	s_info	map_size;
-
-	map_size = get_map_tab_size(map);
-	p = find_character(map, map_size, 'P');
-	if (find_path_to('E', map[p.y][p.x], p) != 'E')
-		return (1);
 	return (0);
+}
+
+int	find_path_to(char c, char **map_cpy)
+{
+	int	y;
+	int	x; 
 	
+	y = 0;
+	x = 0;
+	while (map_cpy[y] && p_growth(map_cpy))
+	{
+		x = 0;
+		while(map_cpy[y][x])
+		{
+			if (map_cpy[y][x] == 'P')
+			{
+				transform_zero(map_cpy, y, x);
+				if (map_cpy[y-1][x] == c || map_cpy[y+1][x] == c
+					|| map_cpy[y][x-1] == c || map_cpy[y][x+1] == c)
+			 	return (1);
+			}	
+			x++;
+		}
+		y++;
+		if (map_cpy[y] == NULL)
+			y = 0;
+	}
+	ft_free_tab(map_cpy);
+	return (0);
 }

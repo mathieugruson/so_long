@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/17 20:21:39 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:17:42 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int	map_wall_error(char **map, s_info map_size);
 
 /* path_error.c */
 
-s_info	find_character(char **map, s_info map_size, char c);
-int	find_path_to(char c, char **map, s_info m);
-int	path_error(char **map);
+void transform_zero(char **map_cpy, int y, int x);
+int	p_growth(char **map_cpy);
+int	find_path_to(char c, char **map_cpy);
 
 /* main.c */
 
-char **get_map(char **map, char *map_name, int fd);
+char **get_map(char *map_name);
 
 #endif 

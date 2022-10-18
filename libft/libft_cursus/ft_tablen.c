@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttab.c                                        :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 15:15:51 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 09:47:16 by mgruson          ###   ########.fr       */
+/*   Created: 2022/10/18 11:25:10 by mgruson           #+#    #+#             */
+/*   Updated: 2022/10/18 11:52:33 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_puttab(char **tab)
-{
-	int	i;
+int	ft_tablen(char **tab)
+{	
+	int	y;
 
-	i = 0;
-	if(!tab)
-		return ;
-	while(tab[i])
+	y = 0;
+	while (tab[y])
 	{
-		ft_putstr(tab[i]);
-		i++;
-	}	
+		y++;
+	}
+	return (y);
 }
+
+/*
+This function returns the line number of a table
+As tab[0] is the irst line of a table, y is the last line but not
+the protection
+*/

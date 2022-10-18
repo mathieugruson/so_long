@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 15:12:52 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/17 14:36:32 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:35:04 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strlen(const char *str)
 	i = 0;
 	if (!str)
 		return (i);
-	while (str[i] != '\n' && str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		i++;
 	}

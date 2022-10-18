@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 09:32:17 by mgruson           #+#    #+#             */
-/*   Updated: 2022/06/02 15:51:27 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 12:00:09 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,3 @@ size_t	ft_strlcpy(char *dest, const char *src, unsigned int size)
 	}
 	return (l);
 }
-
-/*
-int main()
-{
-    char    tab[50] = "salut";
-    char    tab1[] = "hi";
-    int nb;
-    
-    nb = 15;
-    printf("%d\n", ft_strlcpy(tab, tab1, nb));
-
-    return 0;
-}*/

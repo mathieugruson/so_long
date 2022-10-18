@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:41:40 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/17 19:04:48 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:17:08 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int	map_wall_error(char **map, s_info map_size)
 int	map_error(char **map)
 {
 	s_info	map_size;
-
+	char **map_cpy;
+	
 	map_size = get_map_tab_size(map);
 	if (map_dimension_error(map_size))
 		return (1);
@@ -85,8 +86,8 @@ int	map_error(char **map)
 		return (1);
 	if (map_character_error(map, map_size))
 		return (1);
-	if (path_error(map))
+	map_cpy = get_map("map.ber");
+	if (!find_path_to('E', map_cpy))
 		return(1);
-		
 	return (0);
 }
