@@ -19,7 +19,8 @@ $(NAME) : $(functions_o)
 
 clean :
 	$(MAKE) fclean -C libft
-	rm -f $(functions_o) 
+	rm -f $(functions_o)
+	rm so_long 
 
 fclean : clean
 	rm -f $(NAME)
