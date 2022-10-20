@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:22:38 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/20 16:36:03 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:12:32 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,42 @@ void	display_at_window(char **map, t_info window_size)
 		{
 			if (map[y][x] == '0' || map[y][x] == 'P' )
 				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.all, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
+			// if (map[y][x] == 'P')
+			// 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.p, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
+			x++;
+		}
+		y++;
+	}
+	mlx_loop(mlx.mlx_ptr);
+	display_at_window2(map, window_size);	
+}
+
+void	display_at_window2(char **map, t_info window_size)
+{
+	int		y;
+	int		x;
+	t_mlx	mlx;
+	t_info	img_size;
+	t_info	element_coordinates;
+
+	y = 0;
+	x = 0;
+	img_size.x = IMG_DIMENSION;
+	img_size.y = IMG_DIMENSION;
+
+	mlx.mlx_ptr = mlx_init();	
+	mlx.img_relative_path.all = "./img/grass.xpm";
+	mlx.img_relative_path.p = "./img/character.xpm";
+	
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, window_size.x, window_size.y, "Hello world!");
+	mlx.img_ptr.all = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.all, &img_size.x, &img_size.y);
+	mlx.img_ptr.p = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.p, &img_size.x, &img_size.y);
+
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
 			if (map[y][x] == 'P')
 				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.p, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
 			x++;
@@ -102,4 +138,5 @@ int	main(int argc, char **argv)
 		return (0);	
 	}
 	display_at_window(map, window_size);
+
 }
