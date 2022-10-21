@@ -27,39 +27,31 @@ int	handle_keyrelease(int keysym, t_mlx *data)
 	return (0);
 }
 
-void	display_at_window(char **map, t_mlx *mlx)
+void	get_filename(t_mlx	*mlx)
 {
-	int		y;
-	int		x;
-	t_xy	map_size;
-
-
-	y = 0;
-	x = 0;
-	map_size = get_map_tab_size(map);
-	mlx->img_size = IMG_DIMENSION;
-	mlx->mlx_ptr = mlx_init();
-	if (mlx->mlx_ptr == NULL)
-		return ;	
 	mlx->filename_zero = "./img/orange_sand.xpm";
 	mlx->filename_p = "./img/player_cap.xpm";
 	mlx->filename_one = "./img/sea.xpm";
 	mlx->filename_e = "./img/raft.xpm";
 	mlx->filename_c = "./img/lifejacket.xpm";
+}
 
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (mlx->img_size * map_size.x) , (mlx->img_size * map_size.y) , "Hello world!");
-	if (mlx->win_ptr == NULL)
-	{
-		free(mlx->win_ptr);
-		return ;
-	}
-	
+void	get_xpm_file(t_mlx *mlx)
+{
 	mlx->img_zero = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_zero, &mlx->img_size, &mlx->img_size);
 	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_p, &mlx->img_size,&mlx->img_size);
 	mlx->img_one = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_one, &mlx->img_size,&mlx->img_size);
 	mlx->img_e = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_e, &mlx->img_size,&mlx->img_size);	
 	mlx->img_c = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_c, &mlx->img_size,&mlx->img_size);
-	
+}
+
+void display_map(char **map, t_mlx *mlx)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	x = 0;
 	while (map[y])
 	{
 		x = 0;
@@ -79,13 +71,30 @@ void	display_at_window(char **map, t_mlx *mlx)
 		}
 		y++;
 	}
+}
+
+void	display_at_window(char **map, t_mlx *mlx)
+{
+	t_xy	map_size;
+
+	map_size = get_map_tab_size(map);
+	mlx->img_size = IMG_DIMENSION;
+	mlx->mlx_ptr = mlx_init();
+	if (mlx->mlx_ptr == NULL)
+		return ;
+	get_filename(mlx);	
+	get_xpm_file(mlx);
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (mlx->img_size * map_size.x) , (mlx->img_size * map_size.y) , "Hello world!");
+	if (mlx->win_ptr == NULL)
+	{
+		free(mlx->win_ptr);
+		return ;
+	}
+	display_map(map, mlx);
 	mlx_loop_hook(mlx->mlx_ptr, &handle_no_event, mlx);
 	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, mlx);
-	// mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &move_up_keyrelease, &mlx);
-
 	mlx_loop(mlx->mlx_ptr);
 	mlx_destroy_display(mlx->mlx_ptr);
-	
 }
 
 int	main(int argc, char **argv)
