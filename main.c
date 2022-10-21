@@ -99,7 +99,8 @@ int	move_up(int keysym, t_mlx *mlx, char **map, t_xy map_size)
 {
 	if (keysym == XK_w)
 	{
-		move_up_p(map);
+		// map[3][2] = 'C';
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
 		display_map(map, mlx);
 	}
 	printf("Keypress: %d\n", keysym);
@@ -109,6 +110,7 @@ int	move_up(int keysym, t_mlx *mlx, char **map, t_xy map_size)
 void	display_at_window(char **map, t_mlx *mlx)
 {
 	t_xy	map_size;
+	int		KeySym;
 
 	map_size = get_map_tab_size(map);
 	mlx->img_size = IMG_DIMENSION;
@@ -125,9 +127,10 @@ void	display_at_window(char **map, t_mlx *mlx)
 	}
 	display_map(map, mlx);
 	mlx_loop_hook(mlx->mlx_ptr, &handle_no_event, mlx);
-	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &move_up, mlx);
-	mlx_loop(mlx->mlx_ptr);
 	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, mlx);
+	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &move_up, mlx);
+	// map[3][2] = 'C';
+	// display_map(map, mlx);
 	mlx_loop(mlx->mlx_ptr);
 	mlx_destroy_display(mlx->mlx_ptr);
 }
