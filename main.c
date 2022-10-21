@@ -6,20 +6,22 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:22:38 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/20 17:12:32 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:39:22 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-#define IMG_DIMENSION 34
+#define IMG_DIMENSION 200
 
 typedef struct img_ptr
 {
-	void	*all;
+	void	*one;
 	void	*zero;
 	void	*p;
+	void	*pc;
 	void	*e;
+	void	*ep;
 	void	*c;	
 }	t_img_ptr;
 
@@ -55,63 +57,40 @@ void	display_at_window(char **map, t_info window_size)
 	img_size.y = IMG_DIMENSION;
 
 	mlx.mlx_ptr = mlx_init();	
-	mlx.img_relative_path.all = "./img/grass.xpm";
-	mlx.img_relative_path.p = "./img/character.xpm";
+	mlx.img_relative_path.zero = "./img/orange_sand.xpm";
+	mlx.img_relative_path.p = "./img/player_cap.xpm";
+	mlx.img_relative_path.one = "./img/see.xpm";
+	mlx.img_relative_path.e = "./img/raft.xpm";
+	mlx.img_relative_path.c = "./img/lifejacket.xpm";
+	
 	
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, window_size.x, window_size.y, "Hello world!");
-	mlx.img_ptr.all = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.all, &img_size.x, &img_size.y);
+	mlx.img_ptr.zero = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.zero, &img_size.x, &img_size.y);
 	mlx.img_ptr.p = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.p, &img_size.x, &img_size.y);
-
+	mlx.img_ptr.one = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.one, &img_size.x, &img_size.y);
+	mlx.img_ptr.e = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.e, &img_size.x, &img_size.y);	
+	mlx.img_ptr.c = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.c, &img_size.x, &img_size.y);
+	
 	while (map[y])
 	{
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == '0' || map[y][x] == 'P' )
-				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.all, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
-			// if (map[y][x] == 'P')
-			// 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.p, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
+			if (map[y][x] == '0')
+				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.zero, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
+			if (map[y][x] == 'P')
+				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.p, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
+			if (map[y][x] == '1')
+				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.one, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
+			if (map[y][x] == 'C')
+				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.c, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
+			if (map[y][x] == 'E')
+				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.e, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
 			x++;
 		}
 		y++;
 	}
 	mlx_loop(mlx.mlx_ptr);
-	display_at_window2(map, window_size);	
-}
-
-void	display_at_window2(char **map, t_info window_size)
-{
-	int		y;
-	int		x;
-	t_mlx	mlx;
-	t_info	img_size;
-	t_info	element_coordinates;
-
-	y = 0;
-	x = 0;
-	img_size.x = IMG_DIMENSION;
-	img_size.y = IMG_DIMENSION;
-
-	mlx.mlx_ptr = mlx_init();	
-	mlx.img_relative_path.all = "./img/grass.xpm";
-	mlx.img_relative_path.p = "./img/character.xpm";
-	
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, window_size.x, window_size.y, "Hello world!");
-	mlx.img_ptr.all = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.all, &img_size.x, &img_size.y);
-	mlx.img_ptr.p = mlx_xpm_file_to_image(mlx.mlx_ptr, mlx.img_relative_path.p, &img_size.x, &img_size.y);
-
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == 'P')
-				mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr.p, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
-			x++;
-		}
-		y++;
-	}
-	mlx_loop(mlx.mlx_ptr);	
 }
 
 
