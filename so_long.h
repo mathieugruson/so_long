@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/21 14:55:43 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/21 20:26:53 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,34 @@
 /* dimension definition */
 
 #define IMG_DIMENSION 200
-
-typedef struct coordinates
+typedef	struct struct_gps
 {
-	int			x;
-	int			y;
-}					t_xy;
-
-typedef struct img_ptr
-{
-	t_xy	size;
-	void	*one;
-	void	*zero;
-	void	*p;
-	void	*pc;
-	void	*e;
-	void	*ep;
-	void	*c;	
-}					t_img;
+	int		y;
+	int		x;
+}	t_xy;
 
 typedef struct struct_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_img	img_ptr;
-	t_xy	img_size;
-	t_img	filename;	
+	int		x;
+	int		y;
+	int		img_size;
+	void	*img_one;
+	void	*img_zero;
+	void	*img_p;
+	void	*img_pc;
+	void	*img_e;
+	void	*img_ep;
+	void	*img_c;	
+	void	*filename_one;
+	void	*filename_zero;
+	void	*filename_p;
+	void	*filename_pc;
+	void	*filename_e;
+	void	*filename_ep;
+	void	*filename_c;		
 }					t_mlx;
-
-
 
 /* get_map.c */
 
