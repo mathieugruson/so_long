@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_error.c                                        :+:      :+:    :+:   */
+/*   are_map_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:41:40 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 16:20:47 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/21 14:15:21 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	map_dimension_error(t_info map_size)
+int	map_dimension_error(t_xy map_size)
 {
 	if (map_size.y < 3)
 		return (1);
@@ -23,7 +23,7 @@ int	map_dimension_error(t_info map_size)
 	return (0);
 }
 
-int	map_character_error(char **map, t_info map_size)
+int	map_character_error(char **map, t_xy map_size)
 {
 	int	i;
 	int	j;
@@ -52,7 +52,7 @@ int	map_character_error(char **map, t_info map_size)
 	return (0);
 }
 
-int	map_wall_error(char **map, t_info map_size)
+int	map_wall_error(char **map, t_xy map_size)
 {
 	int	i;
 	int	j;
@@ -74,9 +74,9 @@ int	map_wall_error(char **map, t_info map_size)
 	return (0);
 }
 
-int	map_error(char **map)
+int	are_map_error(char **map)
 {
-	t_info	map_size;
+	t_xy	map_size;
 	char	**map_cpy;
 
 	map_size = get_map_tab_size(map);

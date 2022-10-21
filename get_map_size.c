@@ -6,18 +6,18 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:42:18 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 16:20:38 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/21 14:15:21 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_info	get_map_fd_size(char *map_name)
+t_xy	get_map_fd_size(char *map_name)
 {
 	int		fd;
 	char	*tmp;
 	int		i;
-	t_info	map;
+	t_xy	map;
 
 	map.x = 0;
 	map.y = 0;
@@ -39,10 +39,10 @@ t_info	get_map_fd_size(char *map_name)
 	return (map);
 }
 
-t_info	get_map_tab_size(char **tab)
+t_xy	get_map_tab_size(char **tab)
 {
 	int		i;
-	t_info	map;
+	t_xy	map;
 
 	map.x = 0;
 	map.y = 0;

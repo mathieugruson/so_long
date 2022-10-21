@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 16:07:06 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 16:10:22 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/21 14:15:21 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	**get_map(char *map_name)
 {
 	int		i;
 	char	*line_map;
-	t_info	map_size;
+	t_xy	map_size;
 	int		fd;
 	char	**map;
 
