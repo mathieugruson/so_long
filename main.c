@@ -73,6 +73,39 @@ void display_map(char **map, t_mlx *mlx)
 	}
 }
 
+void move_up_p(char **map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	x = 0;
+	while (map[y])
+	{
+		x = 0;
+		while(map[y][x])
+		{
+			if (map[y][x] == 'P')
+			{
+				map[y + 1][x] = 'P';
+				map[y][x] = '0';
+			}
+			x++;
+		}
+		y++;
+	}
+}
+int	move_up(int keysym, t_mlx *mlx, char **map, t_xy map_size)
+{
+	if (keysym == XK_w)
+	{
+		move_up_p(map);
+		display_map(map, mlx);
+	}
+	printf("Keypress: %d\n", keysym);
+	return (0);
+}
+
 void	display_at_window(char **map, t_mlx *mlx)
 {
 	t_xy	map_size;
@@ -92,6 +125,8 @@ void	display_at_window(char **map, t_mlx *mlx)
 	}
 	display_map(map, mlx);
 	mlx_loop_hook(mlx->mlx_ptr, &handle_no_event, mlx);
+	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &move_up, mlx);
+	mlx_loop(mlx->mlx_ptr);
 	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, mlx);
 	mlx_loop(mlx->mlx_ptr);
 	mlx_destroy_display(mlx->mlx_ptr);
