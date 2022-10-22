@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/21 20:26:53 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/22 18:17:12 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 /* error definition */
 
 #define NO_ERROR 1
-#define ERRO -1
+#define ERROR 0
 #define ERROR_MALLOC -2
 #define	ERROR_MLX -3
 #define	ERROR_WIN -4 
@@ -42,6 +42,7 @@ typedef	struct struct_gps
 
 typedef struct struct_mlx
 {
+	char	**map;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int		x;
@@ -72,17 +73,28 @@ char	**get_map(char *map_name);
 t_xy	get_map_fd_size(char *map_name);
 t_xy	get_map_tab_size(char **map);
 
-/* map_error.c */
+/* is_valid.c */
 
-int		are_map_error(char **map);
-int		map_character_error(char **map, t_xy map_size);
-int		map_dimension_error(t_xy map_size);
-int		map_wall_error(char **map, t_xy map_size);
+int	is_map_dimension_valid(t_xy map_size);
+int	are_map_character_valid(char **map, t_xy map_size);
+int	are_map_wall_valid(char **map, t_xy map_size);
+int	is_valid(char **map);
 
-/* path_error.c */
+/* is_path_in.c */
 
-void	transform_zero(char **map_cpy, int y, int x);
-int		p_growth(char **map_cpy);
-int		find_path_to(char c, char **map_cpy);
+void	transform_zero_to(char c, char **map, int y, int x);
+int		can_growing(char c, char **map, char goal);
+int		is_path_to(char c, char **map);
+int		is_path_in(char **map);
+int		are_accessible(char c, char **map);
+int		is_still(char c, char **map);
+
+
+/* move_map.c */
+
+void move_up(char ***map);
+void move_down(char ***map);
+void move_left(char ***map);
+void move_right(char ***map);
 
 #endif 
