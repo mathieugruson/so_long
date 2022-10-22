@@ -6,11 +6,32 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:41:40 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/22 17:34:34 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/22 18:58:47 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	is_in_map(char c, char **map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	x = 0;
+	while(map[y])
+	{
+		x = 0;
+		while(map[y][x])
+		{
+			if (map[y][x] == c)
+				return (NO_ERROR);
+			x++;
+		}
+		y++;
+	}
+	return (ERROR);
+}
 
 int	is_map_dimension_valid(t_xy map_size)
 {
@@ -23,15 +44,36 @@ int	is_map_dimension_valid(t_xy map_size)
 	return (NO_ERROR);
 }
 
+int	is_one(char c, char **map)
+{
+	int	y;
+	int	x;
+	int	i;
+	y = 0;
+	x = 0;
+	while(map[y])
+	{
+		x = 0;
+		while(map[y][x])
+		{
+			if (map[y][x] == c)
+				i++;
+			x++;
+		}
+		y++;
+	}
+	if (i != 1)
+		return (ERROR);
+	return (NO_ERROR);	
+}
+
 int	are_map_character_valid(char **map, t_xy map_size)
 {
 	int	i;
 	int	j;
-	int	c;
 
 	i = 0;
 	j = 0;
-	c = 0;
 	while (map[i])
 	{
 		j = 0;
@@ -40,14 +82,13 @@ int	are_map_character_valid(char **map, t_xy map_size)
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'C'
 				&& map[i][j] != 'E' && map[i][j] != 'P')
 				return (ERROR);
-			if (map[i][j] == 'E' || map[i][j] == 'P' )
-			{	
-				if (++c > 2)
-					return (ERROR);
-			}
 			j++;
 		}
 		i++;
+	}
+	if (is_one('E', map) && is_one('P', map) && is_in_map('C', map))
+	{
+		return (NO_ERROR);
 	}
 	return (NO_ERROR);
 }
@@ -92,7 +133,6 @@ int	is_valid(char **map)
 		ft_free_tab(map_cpy);
 		return (ERROR);
 	}
-	printf("c1\n");
 	ft_free_tab(map_cpy);
 	return (NO_ERROR);
 }

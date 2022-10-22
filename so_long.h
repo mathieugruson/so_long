@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/22 18:17:12 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/22 18:51:28 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int	is_map_dimension_valid(t_xy map_size);
 int	are_map_character_valid(char **map, t_xy map_size);
 int	are_map_wall_valid(char **map, t_xy map_size);
 int	is_valid(char **map);
+int	is_in_map(char c, char **map);
+int	is_one(char c, char **map);
+
 
 /* is_path_in.c */
 
@@ -87,8 +90,6 @@ int		can_growing(char c, char **map, char goal);
 int		is_path_to(char c, char **map);
 int		is_path_in(char **map);
 int		are_accessible(char c, char **map);
-int		is_still(char c, char **map);
-
 
 /* move_map.c */
 

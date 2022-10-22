@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 18:47:09 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/22 18:17:22 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/22 18:54:50 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	transform_zero_to(char c, char **map, int y, int x)
 {
 	if (map[y - 1][x] == '0' || map[y - 1][x] == 'C')
 		map[y - 1][x] = c;
-	if (map[y + 1][x] == '0' || map[y - 1][x] == 'C')
+	if (map[y + 1][x] == '0' || map[y + 1][x] == 'C')
 		map[y + 1][x] = c;
-	if (map[y][x - 1] == '0' || map[y - 1][x] == 'C')
+	if (map[y][x - 1] == '0' || map[y][x - 1] == 'C')
 		map[y][x - 1] = c;
-	if (map[y][x + 1] == '0' || map[y - 1][x] == 'C')
+	if (map[y][x + 1] == '0' || map[y][x + 1] == 'C')
 		map[y][x + 1] = c;
 }
 
@@ -95,6 +95,9 @@ int	are_accessible(char c, char **map)
 			if (map[y][x] == 'P')
 			{
 				transform_zero_to('P', map, y, x);
+				printf("\n");
+				ft_puttab(map);
+				printf("\n");
 			}
 			x++;
 		}
@@ -102,30 +105,9 @@ int	are_accessible(char c, char **map)
 		if (map[y] == NULL)
 			y = 0;
 	}
-	if (is_still(('C'), map))
+	if (is_in_map(('C'), map))
 		return (ERROR);
 	return (NO_ERROR);
-}
-
-int	is_still(char c, char **map)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	x = 0;
-	while(map[y])
-	{
-		x = 0;
-		while(map[y][x])
-		{
-			if (map[y][x] == c)
-				return (NO_ERROR);
-			x++;
-		}
-		y++;
-	}
-	return (ERROR);
 }
 
 int	is_path_in(char **map)
@@ -136,3 +118,18 @@ int	is_path_in(char **map)
 		return (ERROR);
 	return (NO_ERROR);
 }
+
+/*
+1111111111111
+1C01000000101
+1000011000111
+1001100000001
+1001100000001
+10101000EPC01
+1010100000011
+1010100000101
+1010100111001
+1010111101001
+1000000001001
+1111111111111
+*/
