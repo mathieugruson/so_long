@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 18:47:09 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 16:22:25 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/23 21:38:54 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	is_path_to(char c, char **map)
 		if (map[y] == NULL)
 			y = 0;
 	}
-	return ;
+	return (ft_printf("Error\nThere is no path to E\n"), ERROR);
 }
 
 int	are_accessible(char c, char **map)
@@ -103,7 +103,7 @@ int	are_accessible(char c, char **map)
 			y = 0;
 	}
 	if (is_in_map(('C'), map))
-		return (ERROR);
+		return (ft_printf("Error\nC are not accessible\n"), ERROR);
 	return (NO_ERROR);
 }
 

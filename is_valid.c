@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:41:40 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/22 18:58:47 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/23 22:22:33 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	is_in_map(char c, char **map)
 
 	y = 0;
 	x = 0;
-	while(map[y])
+	while (map[y])
 	{
 		x = 0;
-		while(map[y][x])
+		while (map[y][x])
 		{
 			if (map[y][x] == c)
 				return (NO_ERROR);
@@ -36,11 +36,15 @@ int	is_in_map(char c, char **map)
 int	is_map_dimension_valid(t_xy map_size)
 {
 	if (map_size.y < 3)
-		return (ERROR);
+		return (ft_printf("Error\nOrdinate not enough big\n"), ERROR);
 	if (map_size.x < 3)
-		return (ERROR);
+		return (ft_printf("Error\nAbscissa not enough big\n"), ERROR);
 	if (map_size.y / map_size.x == 1)
-		return (ERROR);
+		return (ft_printf("Error\nMap is a square\n"), ERROR);
+	if (map_size.y > 29)
+		return (ft_printf("Error\nOrdinate too big\n"), ERROR);
+	if (map_size.x > 49)
+		return (ft_printf("Error\nAbscissa too big\n"), ERROR);
 	return (NO_ERROR);
 }
 
@@ -49,8 +53,10 @@ int	is_one(char c, char **map)
 	int	y;
 	int	x;
 	int	i;
+	
 	y = 0;
 	x = 0;
+	i = 0;
 	while(map[y])
 	{
 		x = 0;
@@ -81,14 +87,14 @@ int	are_map_character_valid(char **map, t_xy map_size)
 		{	
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'C'
 				&& map[i][j] != 'E' && map[i][j] != 'P')
-				return (ERROR);
+				return (ft_printf("Error\nCharacter not authorized in the map\n"), ERROR);
 			j++;
 		}
 		i++;
 	}
-	if (is_one('E', map) && is_one('P', map) && is_in_map('C', map))
+	if (is_one('E', map) == ERROR || is_one('P', map) == ERROR || is_in_map('C', map) == ERROR)
 	{
-		return (NO_ERROR);
+		return (ft_printf("Error\nNot good character number\n"), ERROR);
 	}
 	return (NO_ERROR);
 }
@@ -107,7 +113,7 @@ int	are_map_wall_valid(char **map, t_xy map_size)
 		{	
 			if (map[0][j] != '1' || map[map_size.y - 1][j] != '1'
 				|| map[i][0] != '1' || map[i][map_size.x - 1] != '1')
-				return (ERROR);
+				return (ft_printf("Error\nWall not valid\n"), ERROR);
 			j++;
 		}
 		i++;

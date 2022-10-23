@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 14:07:59 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 19:01:51 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/23 21:07:05 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int move_map(char ***map, t_mlx *mlx, char dir)
 		x = 0;
 		while((*map)[y][x])
 		{
-			if ((*map)[y][x] == 'P' || (*map)[y][x] == 'S')
+			if ((*map)[y][x] == 'P')
 			{
 				i = update_map(map, y, x, dir);
 				get_map_display((*mlx).map, mlx);	
