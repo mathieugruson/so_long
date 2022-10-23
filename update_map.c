@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:28:15 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 18:37:35 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:54:16 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	fdir(int pos, char coor, char dir)
 {
-	printf("c1\n");
 	if (dir == 'U' && coor == 'Y')
 		return (pos - 1);
 	if (dir == 'D' && coor == 'Y')
@@ -83,5 +82,3 @@ int	update_map(char ***map, int y, int x, char dir)
 	i = s_move(map, y, x, dir) + i;
 	return (i);
 }
-
-

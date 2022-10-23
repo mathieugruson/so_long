@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:59:59 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 18:35:37 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:59:26 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,23 @@ void get_map_display(char **map, t_mlx *mlx)
 
 int	handle_keyrelease(int keysym, t_mlx *mlx)
 {
-	static int	i = 0;
-	
+	static move = 0;
+	int i;
+
+	i = 0;
 	if (keysym == XK_Escape)
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	if (keysym == XK_w)
-		i = move_map(&mlx->map, mlx, 'U') + i;
+		i = move_map(&mlx->map, mlx, 'U');
 	if (keysym == XK_s)
-		i = move_map(&mlx->map, mlx, 'D') + i;
+		i = move_map(&mlx->map, mlx, 'D');
 	if (keysym == XK_d)
-		i = move_map(&mlx->map, mlx, 'R') + i;
+		i = move_map(&mlx->map, mlx, 'R');
 	if (keysym == XK_a)
-		i = move_map(&mlx->map, mlx, 'L') + i;
-	ft_printf("Number of movement : %d\n", i);
-	printf("Keypress: %d\n", keysym);
+		i = move_map(&mlx->map, mlx, 'L');
+	move = move + i;
+	if (i == 1)
+		ft_printf("Number of movement : %d\n", move);
 	return (0);
 }
 
