@@ -6,13 +6,13 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:28:15 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 17:27:20 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:37:35 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		fdir(int pos, char coor, char dir)
+int	fdir(int pos, char coor, char dir)
 {
 	printf("c1\n");
 	if (dir == 'U' && coor == 'Y')
@@ -34,48 +34,54 @@ int		fdir(int pos, char coor, char dir)
 	return (0);
 }
 
-void	p_move(char ***map, int y, int x, char dir)
+int	p_move(char ***map, int y, int x, char dir)
 {
 	if ((*map)[y][x] == 'P' && (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == '0')
 	{
 		(*map)[y][x] = '0';
 		(*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] = 'P';
-		return ;
+		return (1);
 	}
 	if ((*map)[y][x] == 'P' && (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == 'C')
 	{
 		(*map)[y][x] = '0';
 		(*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] = 'S';
-		return ;
+		return (1);
 	}
+	return (0);
 }
 
-void	s_move(char ***map, int y, int x, char dir)
+int	s_move(char ***map, int y, int x, char dir)
 {
 	if ((*map)[y][x] == 'S' && (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == '0')
 	{
 		(*map)[y][x] = '0';
 		(*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] = 'S';
-		return ;
+		return (1);
 	}
 	if ((*map)[y][x] == 'S' && (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == 'C')
 	{
 		(*map)[y][x] = '0';
 		(*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] = 'S';
-		return ;
+		return (1);
 	}
 	if ((*map)[y][x] == 'S'&& (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == 'E')
 	{
 		(*map)[y][x] = '0';
 		(*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] = 'W';
-		return ;
-	}	
+		return (1);
+	}
+	return (0);	
 }	
 
-void	update_map(char ***map, int y, int x, char dir)
+int	update_map(char ***map, int y, int x, char dir)
 {
-	p_move(map, y, x, dir);
-	s_move(map, y, x, dir);
+	int	i;
+	
+	i = 0;
+	i = p_move(map, y, x, dir) + i;
+	i = s_move(map, y, x, dir) + i;
+	return (i);
 }
 
 

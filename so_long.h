@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 17:15:27 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:33:41 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ typedef struct struct_mlx
 	void	*filename_w;
 }					t_mlx;
 
+/* display map */
+
+int	handle_no_event(void *data);
+void	get_xpm_file(t_mlx *mlx);
+void get_map_display(char **map, t_mlx *mlx);
+int	handle_keyrelease(int keysym, t_mlx *mlx);
+char	display_map(char **map, t_mlx *mlx);
+
 /* get_map.c */
 
 char	**get_map(char *map_name);
@@ -93,16 +101,13 @@ int		are_accessible(char c, char **map);
 
 /* move_map.c */
 
-void	move_up(char ***map);
-void	move_down(char ***map);
-void	move_left(char ***map);
-void	move_right(char ***map);
+int		move_map(char ***map, t_mlx *mlx, char dir);
 
 /* update_map.c */
 
 int		fdir(int pos, char coor, char dir);
-void	p_move(char ***map, int y, int x, char dir);
-void	s_move(char ***map, int y, int x, char dir);
-void	update_map(char ***map, int y, int x, char dir);
+int		p_move(char ***map, int y, int x, char dir);
+int		s_move(char ***map, int y, int x, char dir);
+int		update_map(char ***map, int y, int x, char dir);
 
 #endif 
