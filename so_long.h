@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/22 18:51:28 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/23 17:15:27 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ typedef struct struct_mlx
 	int		x;
 	int		y;
 	int		img_size;
-	void	*img_one;
 	void	*img_zero;
+	void	*img_one;
 	void	*img_p;
-	void	*img_pc;
 	void	*img_e;
-	void	*img_ep;
-	void	*img_c;	
-	void	*filename_one;
+	void	*img_c;
+	void	*img_s;
+	void	*img_w;	
 	void	*filename_zero;
+	void	*filename_one;
 	void	*filename_p;
-	void	*filename_pc;
 	void	*filename_e;
-	void	*filename_ep;
 	void	*filename_c;		
+	void	*filename_s;
+	void	*filename_w;
 }					t_mlx;
 
 /* get_map.c */
@@ -75,12 +75,12 @@ t_xy	get_map_tab_size(char **map);
 
 /* is_valid.c */
 
-int	is_map_dimension_valid(t_xy map_size);
-int	are_map_character_valid(char **map, t_xy map_size);
-int	are_map_wall_valid(char **map, t_xy map_size);
-int	is_valid(char **map);
-int	is_in_map(char c, char **map);
-int	is_one(char c, char **map);
+int		is_map_dimension_valid(t_xy map_size);
+int		are_map_character_valid(char **map, t_xy map_size);
+int		are_map_wall_valid(char **map, t_xy map_size);
+int		is_valid(char **map);
+int		is_in_map(char c, char **map);
+int		is_one(char c, char **map);
 
 
 /* is_path_in.c */
@@ -93,9 +93,16 @@ int		are_accessible(char c, char **map);
 
 /* move_map.c */
 
-void move_up(char ***map);
-void move_down(char ***map);
-void move_left(char ***map);
-void move_right(char ***map);
+void	move_up(char ***map);
+void	move_down(char ***map);
+void	move_left(char ***map);
+void	move_right(char ***map);
+
+/* update_map.c */
+
+int		fdir(int pos, char coor, char dir);
+void	p_move(char ***map, int y, int x, char dir);
+void	s_move(char ***map, int y, int x, char dir);
+void	update_map(char ***map, int y, int x, char dir);
 
 #endif 
