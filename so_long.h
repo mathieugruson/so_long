@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 22:23:43 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/25 23:16:25 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 /* dimension definition */
 
 #define IMG_DIMENSION 48
+
 typedef	struct struct_gps
 {
 	int		y;
@@ -48,19 +49,19 @@ typedef struct struct_mlx
 	int		x;
 	int		y;
 	int		img_size;
-	void	*img_zero;
-	void	*img_one;
+	void	*img_0;
+	void	*img_1;
 	void	*img_p;
 	void	*img_e;
 	void	*img_c;
 	void	*img_s;
 	void	*img_w;	
-	void	*filename_zero;
-	void	*filename_one;
-	void	*filename_p;
-	void	*filename_e;
-	void	*filename_c;		
-	void	*filename_s;
+	void	*f_0;
+	void	*f_1;
+	void	*f_p;
+	void	*f_e;
+	void	*f_c;		
+	void	*f_s;
 }					t_mlx;
 
 /* display map */
@@ -69,7 +70,7 @@ int		handle_no_event(void *data);
 int		get_xpm_file(t_mlx *mlx);
 int		get_map_display(char **map, t_mlx *mlx);
 int		handle_keyrelease(int keysym, t_mlx *mlx);
-int	display_map(char **map, t_mlx *mlx);
+int		display_map(char **map, t_mlx *mlx);
 
 /* get_map.c */
 
@@ -79,6 +80,10 @@ char	**get_map(char *map_name);
 
 t_xy	get_map_fd_size(char *map_name);
 t_xy	get_map_tab_size(char **map);
+
+/* is_map_name_valid.c */
+
+int	is_map_name_valid(char **argv);
 
 /* is_valid.c */
 

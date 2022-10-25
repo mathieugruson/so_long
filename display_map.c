@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:59:59 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 22:46:11 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/25 23:29:02 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,70 @@
 
 int	handle_no_event(void *data)
 {
-	/* This function needs to exist, but it is useless for the moment */
 	return (0);
 }
 
 int	get_filename(t_mlx	*mlx)
 {
-	mlx->filename_zero = "./img/space_floor.xpm";
-	if (mlx->filename_zero == NULL)
-		return(ft_printf("Error\nWrong file name\n"), ERROR);
-	mlx->filename_p = "./img/ufo.xpm";
-	if (mlx->filename_p == NULL)
-		return(ft_printf("Error\nWrong file name\n"), ERROR);
-	mlx->filename_one = "./img/tree.xpm";
-	if (mlx->filename_one == NULL)
-		return(ft_printf("Error\nWrong file name\n"), ERROR);
-	mlx->filename_e = "./img/base.xpm";
-	if (mlx->filename_e == NULL)
-		return(ft_printf("Error\nWrong file name\n"), ERROR);
-	mlx->filename_c = "./img/battery.xpm";
-	if (mlx->filename_c == NULL)
-		return(ft_printf("Error\nWrong file name\n"), ERROR);
-	mlx->filename_s = "./img/base_battery.xpm";
-	if (mlx->filename_s == NULL)
-		return(ft_printf("Error\nWrong file name\n"), ERROR);
+	mlx->f_0 = "./img/space_floor.xpm";
+	if (mlx->f_0 == NULL)
+		return (ft_printf("Error\nWrong file name\n"), ERROR);
+	mlx->f_p = "./img/ufo.xpm";
+	if (mlx->f_p == NULL)
+		return (ft_printf("Error\nWrong file name\n"), ERROR);
+	mlx->f_1 = "./img/tree.xpm";
+	if (mlx->f_1 == NULL)
+		return (ft_printf("Error\nWrong file name\n"), ERROR);
+	mlx->f_e = "./img/base.xpm";
+	if (mlx->f_e == NULL)
+		return (ft_printf("Error\nWrong file name\n"), ERROR);
+	mlx->f_c = "./img/battery.xpm";
+	if (mlx->f_c == NULL)
+		return (ft_printf("Error\nWrong file name\n"), ERROR);
+	mlx->f_s = "./img/base_battery.xpm";
+	if (mlx->f_s == NULL)
+		return (ft_printf("Error\nWrong file name\n"), ERROR);
 	return (NO_ERROR);
 }
 
 int	get_xpm_file(t_mlx *mlx)
 {
-	mlx->img_zero = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_zero, &mlx->img_size, &mlx->img_size);
-	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_p, &mlx->img_size,&mlx->img_size);
-	mlx->img_one = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_one, &mlx->img_size,&mlx->img_size);
-	mlx->img_e = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_e, &mlx->img_size,&mlx->img_size);	
-	mlx->img_c = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_c, &mlx->img_size,&mlx->img_size);
-	mlx->img_s = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->filename_s, &mlx->img_size,&mlx->img_size);
+	mlx->img_0 = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_0,
+			&mlx->img_size, &mlx->img_size);
+	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_p,
+			&mlx->img_size, &mlx->img_size);
+	mlx->img_1 = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_1,
+			&mlx->img_size, &mlx->img_size);
+	mlx->img_e = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_e,
+			&mlx->img_size, &mlx->img_size);
+	mlx->img_c = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_c,
+			&mlx->img_size, &mlx->img_size);
+	mlx->img_s = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_s,
+			&mlx->img_size, &mlx->img_size);
 	return (NO_ERROR);
 }
 
-int get_map_display(char **map, t_mlx *mlx)
+void	ft_put_image_to_window(int y, int x, t_mlx *mlx, char **map)
+{
+	int	x1;
+	int y2;
+	x1 = x * IMG_DIMENSION;
+	y2 = y * IMG_DIMENSION;
+	if (map[y][x] == '0')
+		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_0, x1, y2);
+	if (map[y][x] == '1')
+		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_1, x1, y2);
+	if (map[y][x] == 'P')
+		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_p, x1, y2);
+	if (map[y][x] == 'C')
+		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_c, x1, y2);
+	if (map[y][x] == 'E')
+		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_e, x1, y2);
+	if (map[y][x] == 'S')
+		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_s, x1, y2);
+}
+
+int	get_map_display(char **map, t_mlx *mlx)
 {
 	int		y;
 	int		x;
@@ -64,19 +89,7 @@ int get_map_display(char **map, t_mlx *mlx)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == '0')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_zero, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
-			if (map[y][x] == '1')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_one, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
-			if (map[y][x] == 'P')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_p, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
-			if (map[y][x] == 'C')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_c, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
-			if (map[y][x] == 'E')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_e, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
-			if (map[y][x] == 'S')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_s, (IMG_DIMENSION * x), (IMG_DIMENSION * y));
-
+			ft_put_image_to_window(y, x, mlx, map);
 			x++;
 		}
 		y++;
@@ -109,6 +122,13 @@ int	handle_keyrelease(int keysym, t_mlx *mlx)
 	return (0);
 }
 
+int	handle_destroynotify(t_mlx *mlx)
+{
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	ft_free_tab(mlx->map);
+	return (0);
+}
+
 int	display_map(char **map, t_mlx *mlx)
 {
 	t_xy	map_size;
@@ -133,9 +153,10 @@ int	display_map(char **map, t_mlx *mlx)
 	get_map_display(mlx->map, mlx);
 	mlx_loop_hook(mlx->mlx_ptr, &handle_no_event, mlx);
 	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, mlx);
+	mlx_hook(mlx->win_ptr, DestroyNotify, StructureNotifyMask, &handle_destroynotify, mlx);
 	mlx_loop(mlx->mlx_ptr);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_zero);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_one);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_0);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_1);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_p);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_c);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_e);

@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:41:40 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 22:22:33 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/25 23:15:19 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	is_in_map(char c, char **map)
 
 int	is_map_dimension_valid(t_xy map_size)
 {
+	if (map_size.y == 0 && map_size.x == -1)
+		return (ft_printf("Error\nNo map\n"), ERROR);
 	if (map_size.y < 3)
 		return (ft_printf("Error\nOrdinate not enough big\n"), ERROR);
 	if (map_size.x < 3)
@@ -48,7 +50,7 @@ int	is_map_dimension_valid(t_xy map_size)
 	return (NO_ERROR);
 }
 
-int	is_one(char c, char **map)
+int	is_1(char c, char **map)
 {
 	int	y;
 	int	x;
@@ -92,7 +94,7 @@ int	are_map_character_valid(char **map, t_xy map_size)
 		}
 		i++;
 	}
-	if (is_one('E', map) == ERROR || is_one('P', map) == ERROR || is_in_map('C', map) == ERROR)
+	if (is_1('E', map) == ERROR || is_1('P', map) == ERROR || is_in_map('C', map) == ERROR)
 	{
 		return (ft_printf("Error\nNot good character number\n"), ERROR);
 	}

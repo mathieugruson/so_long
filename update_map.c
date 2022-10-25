@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:28:15 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/23 21:11:29 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/25 22:35:45 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,23 @@ int	fdir(int pos, char coor, char dir)
 
 int	update_map(char ***map, int y, int x, char dir)
 {
-	if ((*map)[y][x] == 'P' && (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == '0')
+	if ((*map)[y][x] == 'P'
+		&& (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == '0')
 	{
 		(*map)[y][x] = '0';
 		(*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] = 'P';
 		return (1);
 	}
-	if ((*map)[y][x] == 'P' && (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == 'C')
+	if ((*map)[y][x] == 'P'
+		&& (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == 'C')
 	{
 		(*map)[y][x] = '0';
 		(*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] = 'P';
 		return (1);
 	}
-	if ((*map)[y][x] == 'P' && (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == 'E' && !is_in_map('C', *map))
+	if ((*map)[y][x] == 'P'
+		&& (*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] == 'E'
+		&& !is_in_map('C', *map))
 	{
 		(*map)[y][x] = '0';
 		(*map)[fdir(y, 'Y', dir)][fdir(x, 'X', dir)] = 'S';

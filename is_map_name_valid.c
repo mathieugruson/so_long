@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_map_name_valid.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 17:37:38 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/25 21:58:21 by mgruson          ###   ########.fr       */
+/*   Created: 2022/10/25 21:57:35 by mgruson           #+#    #+#             */
+/*   Updated: 2022/10/25 22:34:29 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+int	is_map_name_valid(char **argv)
 {
-	char	**map;
-	t_mlx	mlx;
+	int	len;
 
-	map = NULL;
-	if (argc != 2)
-		return (ERROR);
-	if (!is_map_name_valid(argv))
-		return (ERROR);
-	map = get_map(argv[1]);
-	if (!is_valid(map))
-		return (ERROR);
-	display_map(map, &mlx);
-	return (0);	
+	len = ft_strlen(argv[1]);
+	if (argv[1][len - 1] != 'r' || argv[1][len - 2] != 'e'
+		|| argv[1][len - 3] != 'b' || argv[1][len - 4] != '.'
+		|| !argv[1][len - 5])
+		return (ft_printf("Error\nFile name invalid\n"), ERROR);
+	return (NO_ERROR);
 }
