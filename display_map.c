@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:59:59 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/25 23:29:02 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/25 23:48:48 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	get_xpm_file(t_mlx *mlx)
 void	ft_put_image_to_window(int y, int x, t_mlx *mlx, char **map)
 {
 	int	x1;
-	int y2;
+	int	y2;
+
 	x1 = x * IMG_DIMENSION;
 	y2 = y * IMG_DIMENSION;
 	if (map[y][x] == '0')
@@ -99,9 +100,11 @@ int	get_map_display(char **map, t_mlx *mlx)
 
 int	handle_keyrelease(int keysym, t_mlx *mlx)
 {
-	static move = 0;
-	int i;
+	static int	move;
+	int			i;
 
+	if (!move)
+		move = 0;
 	i = 0;
 	if (keysym == XK_Escape)
 	{	
@@ -129,22 +132,33 @@ int	handle_destroynotify(t_mlx *mlx)
 	return (0);
 }
 
+void	destroy_mlx(t_mlx *mlx)
+{
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_0);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_1);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_p);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_c);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_e);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_s);
+	mlx_destroy_display(mlx->mlx_ptr);
+}
+
 int	display_map(char **map, t_mlx *mlx)
 {
 	t_xy	map_size;
-	int		KeySym;
+	int		keysym;
 
 	map_size = get_map_tab_size(map);
 	mlx->img_size = IMG_DIMENSION;
 	mlx->map = map;
 	get_filename(mlx);
 	if (!get_filename)
-		return ;	
+		return ;
 	mlx->mlx_ptr = mlx_init();
 	if (mlx->mlx_ptr == NULL)
 		return ("Error\nmlx_init function problem");
 	get_xpm_file(mlx);
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (mlx->img_size * map_size.x) , (mlx->img_size * map_size.y) , "Hello world!");
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (mlx->img_size * map_size.x), (mlx->img_size * map_size.y) , "Hello world!");
 	if (mlx->win_ptr == NULL)
 	{
 		free(mlx->win_ptr);
@@ -155,12 +169,6 @@ int	display_map(char **map, t_mlx *mlx)
 	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, mlx);
 	mlx_hook(mlx->win_ptr, DestroyNotify, StructureNotifyMask, &handle_destroynotify, mlx);
 	mlx_loop(mlx->mlx_ptr);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_0);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_1);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_p);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_c);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_e);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_s);
-	mlx_destroy_display(mlx->mlx_ptr);
+	destroy_mlx(mlx);
 	free(mlx->mlx_ptr);
 }
