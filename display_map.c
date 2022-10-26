@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:59:59 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/25 23:48:48 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/26 21:57:56 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,55 @@ int	get_filename(t_mlx	*mlx)
 	return (NO_ERROR);
 }
 
+void	destroy_image_from_xpm_file(t_mlx *mlx)
+{
+	if (mlx->img_0 != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img_0);
+	if (mlx->img_1 != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img_1);
+	if (mlx->img_c != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img_c);
+	if (mlx->img_e != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img_e);
+	if (mlx->img_p != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img_p);
+	if (mlx->img_s != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img_s);
+}
+
 int	get_xpm_file(t_mlx *mlx)
 {
-	mlx->img_0 = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_0,
-			&mlx->img_size, &mlx->img_size);
-	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_p,
-			&mlx->img_size, &mlx->img_size);
-	mlx->img_1 = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_1,
-			&mlx->img_size, &mlx->img_size);
+	mlx->img_0 = NULL;
+	mlx->img_1 = NULL;
+	mlx->img_c = NULL;
+	mlx->img_e = NULL;
+	mlx->img_p = NULL;
+	mlx->img_s = NULL;
+	
 	mlx->img_e = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_e,
 			&mlx->img_size, &mlx->img_size);
+	if (mlx->img_e == NULL)
+		return (destroy_image_from_xpm_file(mlx), ERROR);
+	mlx->img_0 = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_0,
+			&mlx->img_size, &mlx->img_size);
+	if (mlx->img_0 == NULL)
+		return (destroy_image_from_xpm_file(mlx), ERROR);
+	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_p,
+			&mlx->img_size, &mlx->img_size);
+	if (mlx->img_p == NULL)
+		return (destroy_image_from_xpm_file(mlx), ERROR);
+	mlx->img_1 = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_1,
+			&mlx->img_size, &mlx->img_size);
+	if (mlx->img_1 == NULL)
+		return (destroy_image_from_xpm_file(mlx), ERROR);
 	mlx->img_c = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_c,
 			&mlx->img_size, &mlx->img_size);
+	if (mlx->img_c == NULL)
+		return (destroy_image_from_xpm_file(mlx), ERROR);
 	mlx->img_s = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_s,
 			&mlx->img_size, &mlx->img_size);
+	if (mlx->img_s == NULL)
+		return (destroy_image_from_xpm_file(mlx), ERROR);
 	return (NO_ERROR);
 }
 
@@ -141,6 +176,7 @@ void	destroy_mlx(t_mlx *mlx)
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_e);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_s);
 	mlx_destroy_display(mlx->mlx_ptr);
+
 }
 
 int	display_map(char **map, t_mlx *mlx)
@@ -158,6 +194,13 @@ int	display_map(char **map, t_mlx *mlx)
 	if (mlx->mlx_ptr == NULL)
 		return ("Error\nmlx_init function problem");
 	get_xpm_file(mlx);
+	if (get_xpm_file(mlx) == NULL)
+	{
+		mlx_destroy_display(mlx->mlx_ptr);
+		ft_free_tab(mlx->map);
+		free(mlx->mlx_ptr);
+		exit(EXIT_FAILURE);
+	}
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (mlx->img_size * map_size.x), (mlx->img_size * map_size.y) , "Hello world!");
 	if (mlx->win_ptr == NULL)
 	{
