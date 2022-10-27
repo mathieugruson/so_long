@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:59:59 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/27 22:39:58 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/27 22:47:03 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	get_xpm_file(t_mlx *mlx)
 	mlx->img_e = NULL;
 	mlx->img_p = NULL;
 	mlx->img_s = NULL;
-	printf("c3\n");
 	mlx->img_e = mlx_xpm_file_to_image(mlx->mlx_ptr, "./img/bae.xpm",
 			&mlx->img_size, &mlx->img_size);
 	if (mlx->img_e == NULL)
@@ -135,7 +134,6 @@ int	handle_keyrelease(int keysym, t_mlx *mlx)
 	i = 0;
 	if (keysym == XK_Escape)
 		ft_free_mlx(mlx);
-	printf("c1\n");
 	if (keysym == XK_w || keysym == XK_W)
 		i = move_map(&mlx->map, mlx, 'U');
 	if (keysym == XK_s || keysym == XK_S)
