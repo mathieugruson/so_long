@@ -6,24 +6,13 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:59:59 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/27 22:00:28 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/27 22:39:58 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	get_filename(t_mlx	*mlx)
-{
-	mlx->f_0 = "./img/space_floor.xpm";
-	mlx->f_p = "./img/ufo.xpm";
-	mlx->f_1 = "./img/tree.xpm";
-	mlx->f_e = "./img/base.xpm";
-	mlx->f_c = "./img/battery.xpm";
-	mlx->f_s = "./img/base_battery.xpm";
-	return (NO_ERROR);
-}
-
-void	destroy_image_from_xpm_file(t_mlx *mlx)
+int	destroy_image_from_xpm_file(t_mlx *mlx)
 {
 	if (mlx->img_0 != NULL)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->img_0);
@@ -37,6 +26,10 @@ void	destroy_image_from_xpm_file(t_mlx *mlx)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->img_p);
 	if (mlx->img_s != NULL)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->img_s);
+	mlx_destroy_display(mlx->mlx_ptr);
+	free(mlx->mlx_ptr);
+	ft_free_tab(mlx->map);
+	exit (1);
 }
 
 int	get_xpm_file(t_mlx *mlx)
@@ -47,28 +40,28 @@ int	get_xpm_file(t_mlx *mlx)
 	mlx->img_e = NULL;
 	mlx->img_p = NULL;
 	mlx->img_s = NULL;
-	
-	mlx->img_e = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_e,
+	printf("c3\n");
+	mlx->img_e = mlx_xpm_file_to_image(mlx->mlx_ptr, "./img/bae.xpm",
 			&mlx->img_size, &mlx->img_size);
 	if (mlx->img_e == NULL)
 		return (destroy_image_from_xpm_file(mlx), ERROR);
-	mlx->img_0 = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_0,
+	mlx->img_0 = mlx_xpm_file_to_image(mlx->mlx_ptr, "./img/space_floor.xpm",
 			&mlx->img_size, &mlx->img_size);
 	if (mlx->img_0 == NULL)
 		return (destroy_image_from_xpm_file(mlx), ERROR);
-	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_p,
+	mlx->img_p = mlx_xpm_file_to_image(mlx->mlx_ptr,"./img/ufo.xpm",
 			&mlx->img_size, &mlx->img_size);
 	if (mlx->img_p == NULL)
 		return (destroy_image_from_xpm_file(mlx), ERROR);
-	mlx->img_1 = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_1,
+	mlx->img_1 = mlx_xpm_file_to_image(mlx->mlx_ptr, "./img/tree.xpm",
 			&mlx->img_size, &mlx->img_size);
 	if (mlx->img_1 == NULL)
 		return (destroy_image_from_xpm_file(mlx), ERROR);
-	mlx->img_c = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_c,
+	mlx->img_c = mlx_xpm_file_to_image(mlx->mlx_ptr, "./img/battery.xpm",
 			&mlx->img_size, &mlx->img_size);
 	if (mlx->img_c == NULL)
 		return (destroy_image_from_xpm_file(mlx), ERROR);
-	mlx->img_s = mlx_xpm_file_to_image(mlx->mlx_ptr, mlx->f_s,
+	mlx->img_s = mlx_xpm_file_to_image(mlx->mlx_ptr,"./img/base_battery.xpm",
 			&mlx->img_size, &mlx->img_size);
 	if (mlx->img_s == NULL)
 		return (destroy_image_from_xpm_file(mlx), ERROR);
@@ -116,8 +109,9 @@ int	get_map_display(char **map, t_mlx *mlx)
 	return (NO_ERROR);
 }
 
-void	ft_free_mlx(t_mlx *mlx)
-{
+int	ft_free_mlx(t_mlx *mlx)
+{	
+	printf("c2\n");
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_0);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_1);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_p);
@@ -127,8 +121,8 @@ void	ft_free_mlx(t_mlx *mlx)
 	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	mlx_destroy_display(mlx->mlx_ptr);
 	free(mlx->mlx_ptr);
-	ft_free_tab(mlx->map);		
-	return ;
+	ft_free_tab(mlx->map);
+	exit (1) ;
 }
 
 int	handle_keyrelease(int keysym, t_mlx *mlx)
@@ -140,10 +134,8 @@ int	handle_keyrelease(int keysym, t_mlx *mlx)
 		move = 0;
 	i = 0;
 	if (keysym == XK_Escape)
-	{
 		ft_free_mlx(mlx);
-		exit(1);
-	}
+	printf("c1\n");
 	if (keysym == XK_w || keysym == XK_W)
 		i = move_map(&mlx->map, mlx, 'U');
 	if (keysym == XK_s || keysym == XK_S)
@@ -158,12 +150,6 @@ int	handle_keyrelease(int keysym, t_mlx *mlx)
 	return (0);
 }
 
-int	handle_destroynotify(t_mlx *mlx)
-{
-	ft_free_mlx(mlx);
-	exit(1);
-}
-
 void	display_map(char **map, t_mlx *mlx)
 {
 	t_xy	map_size;
@@ -171,26 +157,19 @@ void	display_map(char **map, t_mlx *mlx)
 	map_size = get_map_tab_size(map);
 	mlx->img_size = IMG_DIMENSION;
 	mlx->map = map;
-	get_filename(mlx);
+	// get_filename(mlx);
 	mlx->mlx_ptr = mlx_init();
 	if (mlx->mlx_ptr == NULL)
 		return ;
 	get_xpm_file(mlx);
-	if (get_xpm_file(mlx) == ERROR)
-	{
-		mlx_destroy_display(mlx->mlx_ptr);
-		// ft_free_tab(mlx->map);
-		free(mlx->mlx_ptr);
-		return ;
-	}
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (mlx->img_size * map_size.x), (mlx->img_size * map_size.y) , "SO_LONG");
 	if (mlx->win_ptr == NULL)
 	{
-		free(mlx->win_ptr);
+		ft_free_mlx(mlx);
 		return ;
 	}
 	get_map_display(mlx->map, mlx);
-	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, mlx);
-	mlx_hook(mlx->win_ptr, DestroyNotify, StructureNotifyMask, &handle_destroynotify, mlx);
+	mlx_hook(mlx->win_ptr, KeyPress, KeyPressMask, &handle_keyrelease, mlx);
+	mlx_hook(mlx->win_ptr, DestroyNotify, StructureNotifyMask, &ft_free_mlx, mlx);
 	mlx_loop(mlx->mlx_ptr);
 }
