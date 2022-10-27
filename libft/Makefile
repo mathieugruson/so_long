@@ -12,7 +12,7 @@ $(NAME) : $(functions_o)
 	ar rc $(NAME) $^
 
 $(functions_o) : $(functions_c) $(headers)
-	$(CC) $(flags) -c $(functions_c) -fPIE
+	$(CC) $(flags) -c $(functions_c) 
 
 clean :
 	rm $(NAME) $(functions_o)

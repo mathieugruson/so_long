@@ -6,37 +6,20 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:59:59 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/26 21:57:56 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/27 22:00:28 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	handle_no_event(void *data)
-{
-	return (0);
-}
-
 int	get_filename(t_mlx	*mlx)
 {
 	mlx->f_0 = "./img/space_floor.xpm";
-	if (mlx->f_0 == NULL)
-		return (ft_printf("Error\nWrong file name\n"), ERROR);
 	mlx->f_p = "./img/ufo.xpm";
-	if (mlx->f_p == NULL)
-		return (ft_printf("Error\nWrong file name\n"), ERROR);
 	mlx->f_1 = "./img/tree.xpm";
-	if (mlx->f_1 == NULL)
-		return (ft_printf("Error\nWrong file name\n"), ERROR);
 	mlx->f_e = "./img/base.xpm";
-	if (mlx->f_e == NULL)
-		return (ft_printf("Error\nWrong file name\n"), ERROR);
 	mlx->f_c = "./img/battery.xpm";
-	if (mlx->f_c == NULL)
-		return (ft_printf("Error\nWrong file name\n"), ERROR);
 	mlx->f_s = "./img/base_battery.xpm";
-	if (mlx->f_s == NULL)
-		return (ft_printf("Error\nWrong file name\n"), ERROR);
 	return (NO_ERROR);
 }
 
@@ -133,6 +116,21 @@ int	get_map_display(char **map, t_mlx *mlx)
 	return (NO_ERROR);
 }
 
+void	ft_free_mlx(t_mlx *mlx)
+{
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_0);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_1);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_p);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_c);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_e);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_s);
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx_destroy_display(mlx->mlx_ptr);
+	free(mlx->mlx_ptr);
+	ft_free_tab(mlx->map);		
+	return ;
+}
+
 int	handle_keyrelease(int keysym, t_mlx *mlx)
 {
 	static int	move;
@@ -142,17 +140,17 @@ int	handle_keyrelease(int keysym, t_mlx *mlx)
 		move = 0;
 	i = 0;
 	if (keysym == XK_Escape)
-	{	
-		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-		ft_free_tab(mlx->map);
-	}	
-	if (keysym == XK_w)
+	{
+		ft_free_mlx(mlx);
+		exit(1);
+	}
+	if (keysym == XK_w || keysym == XK_W)
 		i = move_map(&mlx->map, mlx, 'U');
-	if (keysym == XK_s)
+	if (keysym == XK_s || keysym == XK_S)
 		i = move_map(&mlx->map, mlx, 'D');
-	if (keysym == XK_d)
+	if (keysym == XK_d || keysym == XK_D)
 		i = move_map(&mlx->map, mlx, 'R');
-	if (keysym == XK_a)
+	if (keysym == XK_a || keysym == XK_A)
 		i = move_map(&mlx->map, mlx, 'L');
 	move = move + i;
 	if (i == 1)
@@ -162,56 +160,37 @@ int	handle_keyrelease(int keysym, t_mlx *mlx)
 
 int	handle_destroynotify(t_mlx *mlx)
 {
-	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-	ft_free_tab(mlx->map);
-	return (0);
+	ft_free_mlx(mlx);
+	exit(1);
 }
 
-void	destroy_mlx(t_mlx *mlx)
-{
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_0);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_1);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_p);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_c);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_e);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_s);
-	mlx_destroy_display(mlx->mlx_ptr);
-
-}
-
-int	display_map(char **map, t_mlx *mlx)
+void	display_map(char **map, t_mlx *mlx)
 {
 	t_xy	map_size;
-	int		keysym;
 
 	map_size = get_map_tab_size(map);
 	mlx->img_size = IMG_DIMENSION;
 	mlx->map = map;
 	get_filename(mlx);
-	if (!get_filename)
-		return ;
 	mlx->mlx_ptr = mlx_init();
 	if (mlx->mlx_ptr == NULL)
-		return ("Error\nmlx_init function problem");
+		return ;
 	get_xpm_file(mlx);
-	if (get_xpm_file(mlx) == NULL)
+	if (get_xpm_file(mlx) == ERROR)
 	{
 		mlx_destroy_display(mlx->mlx_ptr);
-		ft_free_tab(mlx->map);
+		// ft_free_tab(mlx->map);
 		free(mlx->mlx_ptr);
-		exit(EXIT_FAILURE);
+		return ;
 	}
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (mlx->img_size * map_size.x), (mlx->img_size * map_size.y) , "Hello world!");
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (mlx->img_size * map_size.x), (mlx->img_size * map_size.y) , "SO_LONG");
 	if (mlx->win_ptr == NULL)
 	{
 		free(mlx->win_ptr);
 		return ;
 	}
 	get_map_display(mlx->map, mlx);
-	mlx_loop_hook(mlx->mlx_ptr, &handle_no_event, mlx);
 	mlx_hook(mlx->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, mlx);
 	mlx_hook(mlx->win_ptr, DestroyNotify, StructureNotifyMask, &handle_destroynotify, mlx);
 	mlx_loop(mlx->mlx_ptr);
-	destroy_mlx(mlx);
-	free(mlx->mlx_ptr);
 }

@@ -1,11 +1,11 @@
 NAME = so_long
 CC = gcc
-flags = -Wall -Wextra
+flags = -Wall -Wextra -Werror -g3
 functions_c = *.c 
 headers = *.h
 functions_o = *.o
 libx = -L mlx_linux -lmlx_Linux
-libxflags = -lmlx -lXext -lX11
+libxflags = -lmlx -lXext -lX11 -lmlx_Linux
 
 all : $(NAME) 
 

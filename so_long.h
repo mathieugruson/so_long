@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/25 23:16:25 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/27 21:57:01 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,18 @@ typedef struct struct_mlx
 	void	*f_s;
 }					t_mlx;
 
-/* display map */
+/* display_map.c */
 
+int	get_filename(t_mlx	*mlx);
 int		handle_no_event(void *data);
+void	destroy_image_from_xpm_file(t_mlx *mlx);
 int		get_xpm_file(t_mlx *mlx);
 int		get_map_display(char **map, t_mlx *mlx);
+void	ft_put_image_to_window(int y, int x, t_mlx *mlx, char **map);
+void	ft_free_mlx(t_mlx *mlx);
 int		handle_keyrelease(int keysym, t_mlx *mlx);
-int		display_map(char **map, t_mlx *mlx);
+int		handle_destroynotify(t_mlx *mlx);
+void	display_map(char **map, t_mlx *mlx);
 
 /* get_map.c */
 
