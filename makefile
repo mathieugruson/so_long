@@ -20,14 +20,14 @@ $(NAME) : $(functions_o)
 	$(MAKE) --no-print-directory -C libft
 	$(MAKE) --no-print-directory -C mlx_linux
 	$(CC) $(flags) $(functions_o) libft/libft.a $(libx) $(libxflags) -o $(NAME) -g
-	mkdir obj 
-	mv *.o obj/ 
+#	mkdir obj 
+#	mv *.o obj/ 
 
 clean :
 	$(MAKE) fclean -C libft
 	rm -f $(functions_o)
 	rm so_long
-	rm -dir -f obj 
+# rm -dir -f obj 
 
 fclean : clean
 	rm -f $(NAME)

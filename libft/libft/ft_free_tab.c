@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:18:35 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 15:51:59 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/28 14:39:28 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	ft_free_tab(char **tab)
 	y = 0;
 	while (y < tablen)
 	{
-		free(tab[y]);
+		if (tab[y])
+			free(tab[y]);
 		y++;
 	}	
-	free(tab);
+	if (tab)
+		free(tab);
 }

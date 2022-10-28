@@ -31,15 +31,15 @@ all : $(NAME)
 
 $(NAME) : $(functions_o)
 	ar rc $(NAME) $^
-	mv *.o obj/ 
+#	mv *.o obj/ 
 
 $(functions_o) : $(functions_c) $(headers)
 	$(CC) $(flags) -c $(functions_c) 
-	mkdir obj
+#	mkdir obj
 
 clean :
 	rm $(NAME)
-	rm -dir -f obj
+#	rm -dir -f obj
 
 fclean : clean
 	rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 11:28:37 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/28 11:40:00 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/28 14:41:04 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	destroy_image_from_xpm_file(t_mlx *mlx)
 	mlx_destroy_display(mlx->mlx_ptr);
 	free(mlx->mlx_ptr);
 	ft_free_tab(mlx->map);
+	ft_printf("Problem in img loading\n");
 	exit (1);
 }
 

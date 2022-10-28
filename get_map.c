@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 16:07:06 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/21 14:15:21 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/28 14:36:32 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**get_map(char *map_name)
 		line_map = get_next_line(fd);
 		map[i] = malloc(sizeof(char) * (map_size.x + 2));
 		if (!map[i])
-			return (NULL);
+			return (ft_free_tab(map), NULL);
 		ft_strlcpy(map[i], line_map, map_size.x + 2);
 		free(line_map);
 		i++;
