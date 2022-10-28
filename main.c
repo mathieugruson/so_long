@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:37:38 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/27 22:32:25 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/28 11:47:16 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int	main(int argc, char **argv)
 		return (ERROR);
 	display_map(map, &mlx);
 	ft_free_tab(map);
-	return (0);	
+	return (0);
 }
