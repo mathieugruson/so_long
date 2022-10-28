@@ -39,7 +39,7 @@ $(functions_o) : $(functions_c) $(headers)
 
 clean :
 	rm $(NAME)
-#	rm -dir -f obj
+	rm *.o
 
 fclean : clean
 	rm -f $(NAME)
