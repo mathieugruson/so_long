@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 17:54:55 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/18 15:57:08 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/28 12:39:09 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stddef.h>
-# include "../libft_cursus/libft.h"
+# include "../libft/libft.h"
 
 char	*get_next_line(int fd);
 char	*get_work_line(int fd, char *line);

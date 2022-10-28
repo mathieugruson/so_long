@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 13:24:48 by mgruson           #+#    #+#             */
-/*   Updated: 2022/05/25 12:59:15 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/28 12:16:37 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
-/*
-int main()
-{
-    char *tab;
-
-    tab = "bonjour";
-    ft_memchr(tab, 'o', 7);
-    return (0);
-
-
-	TO PRINT TO UNDERSTAND : 
-
-	attention au depart tu avais  ecrit ds le if : 
-	- (*(char *)(s + i) != '\0' && i < n) 
-	- (*(char unsigned *)s) + i) car ca incremente
-
-	printf("%d\n", ((char unsigned *)s)[0]);
-	printf("%p\n", (char unsigned *)s);
-	printf("%d\n", (((char unsigned *)s)[i]));
-	printf("%p\n", (char unsigned *)s + i);
-}*/

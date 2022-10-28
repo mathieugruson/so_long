@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:27:20 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/28 11:46:54 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/28 12:38:54 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H 
 
 # include "mlx_linux/mlx.h"
-# include "libft/libft_cursus/libft.h"
+# include "libft/libft/libft.h"
 # include "libft/get_next_line/get_next_line.h"
 # include "libft/ft_printf/ft_printf.h"
 # include <X11/X.h>

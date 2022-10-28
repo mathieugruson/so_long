@@ -6,7 +6,7 @@
 /*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 13:09:22 by mgruson           #+#    #+#             */
-/*   Updated: 2022/10/17 15:27:32 by mgruson          ###   ########.fr       */
+/*   Updated: 2022/10/28 12:40:39 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <limits.h>
 # include <stdarg.h>
 
-# include "../libft_cursus/libft.h"
+# include "../libft/libft.h"
 
 int		ft_printf(const char *str, ...);
 int		ft_nbrlen(long long n);
